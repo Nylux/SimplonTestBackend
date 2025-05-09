@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const sequelize = require('./config/database');
+const { swaggerUi, specs } = require("./config/swagger");
 
 dotenv.config(); // Charge les variables d'environnement
 
@@ -32,6 +33,8 @@ app.use('/api', jokeRoutes);
 
 //#endregion
 
+// Documentation Swagger
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 // Démarrage du serveur
 app.listen(PORT, () => {
